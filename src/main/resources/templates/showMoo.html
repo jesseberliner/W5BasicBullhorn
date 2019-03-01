@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="base :: header"></div>
+    <title></title>
+</head>
+<body class="d-flex flex-column">
+<div th:replace="base :: nav"></div>
+<div class="container">
+    <h1 class="my-4">Moo
+        <small></small>
+    </h1>
+    <!--moos-->
+    <div class="row" th:object="${moo}" >
+        <div class="col-md-7">
+            <a th:href="@{/detail/{id}(id=${moo.id})}">
+                <img class="img-fluid rounded mb-3 mb-md-0" th:src="${moo.image}" alt="No photo supplied">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3 th:text="${moo.title}"></h3>
+            <p th:text="${moo.content}"></p>
+            <small th:text="'Posted by: ' + ${moo.postedBy} +' on ' + ${moo.postedDate}"></small><br>
+            <small> <a th:href="@{/update/{id}(id=${moo.id})}">Update</a> -
+                <a th:href="@{/delete/{id}(id=${moo.id})}">Delete</a></small>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+<div th:replace="base :: footer"></div>
+<div th:replace="base :: javascript"></div>
+</body>
+
+</html>
