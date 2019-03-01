@@ -36,17 +36,13 @@ public class MainController {
     public String toDoForm(Model model){
         model.addAttribute("moo", new Moo());
         model.addAttribute("today", new Date());
-        System.out.println(new Date());
         return "addMoo";
     }
 
     @PostMapping("/add")
     public String processForm(@Valid Moo moo, @RequestParam("file")MultipartFile file, Model model, BindingResult result){
 
-        if(result.hasErrors()){
-            model.addAttribute(moo);
-            return "addMoo";
-        }
+
         if(file.isEmpty())
         {
             model.addAttribute("moo", moo);
@@ -59,6 +55,10 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/add";
+        }
+        if(result.hasErrors()){
+            model.addAttribute(moo);
+            return "addMoo";
         }
         return "redirect:/";
     }

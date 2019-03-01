@@ -12,7 +12,8 @@
         <h4>Click on the image to see the moo alone</h4>
     </h1>
     <!--moos-->
-    <!--<th:block th:text="${moos} ? 'see the moos': 'No moos yet'"></th:block>-->
+    <th:block th:text="${#lists.size(moos)} ? '' : 'No moos yet'"></th:block>
+
     <div class="row" th:each="moo : ${moos}">
         <div class="col-md-7">
             <a th:href="@{/detail/{id}(id=${moo.id})}">
@@ -24,10 +25,10 @@
             <p th:text="${moo.content}"></p>
             <small th:text="'Posted by: ' + ${moo.postedBy}"></small>
         </div>
+        <hr/>
     </div>
     <!-- /.row -->
 
-    <hr>
 </div>
 
 <div th:replace="base :: footer"></div>
